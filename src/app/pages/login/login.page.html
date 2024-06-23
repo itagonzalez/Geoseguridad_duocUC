@@ -1,54 +1,46 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title style="font-weight: bold; text-align: center;">GEOSEGURIDAD</ion-title>
+    <ion-title style="font-weight: bold; text-align: center; background-color: #ff5733">
+      GEOSEGURIDAD
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title style="text-align: center;">¡BIENVENIDO!</ion-card-title>
+      <ion-card-title style="text-align: center">¡BIENVENIDO!</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <p style="text-align: center;">Marca tu entrada y salida!</p>
-      <br>
-      <p style="text-align: center;">Ingresa tus datos</p>
-      <form [formGroup]="formularioLogin">
+      <p style="text-align: center">Marca tu entrada y salida!</p>
+      <br />
+      <p style="text-align: center">Ingresa tus datos</p>
+      <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
         <ion-item>
-          <ion-label position="floating">Usuario</ion-label>
-          <ion-input formControlName="user"></ion-input>
+          <ion-label position="floating" for="loginUser">Usuario</ion-label>
+          <ion-input id="loginUser" formControlName="user"></ion-input>
         </ion-item>
-        <ion-note color="danger" *ngIf="formularioLogin.get('user')?.invalid && formularioLogin.get('user')?.touched">
-          El usuario debe ser alfanumérico y tener entre 3 y 8 caracteres.
-        </ion-note>
-
         <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
+          <ion-label position="floating" for="loginPassword">Contraseña</ion-label>
+          <ion-input id="loginPassword" type="password" formControlName="password"></ion-input>
         </ion-item>
-        <ion-note color="danger" *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched">
-          La contraseña debe ser numérica y tener exactamente 4 dígitos.
-        </ion-note>
+        <ion-button expand="block" type="submit" [disabled]="formularioLogin.invalid">Ingresar</ion-button>
       </form>
-      <br>
-
-      <ion-button color="medium" (click)="ingresar()" [disabled]="formularioLogin.invalid">Ingresar</ion-button>
-
-      <p style="text-align: center; margin-top: 10px;">
-        <ion-button color="primary" fill="clear" (click)="registrar()">Crea tu cuenta gratis</ion-button>
+      <br />
+      <p style="text-align: center">
+        <ion-button color="primary" fill="clear" (click)="navigateToRegister()">Crea tu cuenta aquí!</ion-button>
       </p>
     </ion-card-content>
   </ion-card>
- 
-  <div style="text-align: center; height: auto;">
-    <ion-img src="\assets\Skull.png" alt="Perfil"></ion-img>
-  </div>
 
+  <div style="text-align: center; height: auto">
+    <ion-img src="/assets/Skull.png" alt="Perfil"></ion-img>
+  </div>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-title>© 2024 Italo González</ion-title>
+    <ion-title style="background-color: #ff5733">© 2024 Italo González</ion-title>
   </ion-toolbar>
 </ion-footer>

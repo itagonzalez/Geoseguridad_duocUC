@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class RegisterPage {
   formularioRegister: FormGroup;
+  registroExitoso: boolean = false; 
 
   constructor(
     private navCtrl: NavController,
@@ -17,7 +18,12 @@ export class RegisterPage {
     this.formularioRegister = this.formBuilder.group({
       user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(8), Validators.pattern('^[a-zA-Z0-9]*$')]],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]*$')]],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
+      direccion: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      nombreEmpresa: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required]
     });
   }
 
@@ -30,8 +36,17 @@ export class RegisterPage {
       // Guardar usuario en alguna base de datos o servicio
       console.log('Usuario registrado:', { user, email });
 
-      // Redirigir al login
-      this.navCtrl.navigateBack(['/login']);
+      // Guardar en localStorage
+      localStorage.setItem('user', user);
+      localStorage.setItem('password', password);
+
+      // Indicar que el registro fue exitoso
+      this.registroExitoso = true;
+
+      // Redirigir al login después de un breve tiempo (simulado)
+      setTimeout(() => {
+        this.navCtrl.navigateBack(['/login']);
+      }, 2000); // Redirige después de 2 segundos (2000 ms)
     } else {
       console.log('Formulario de registro inválido');
     }

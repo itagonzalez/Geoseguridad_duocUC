@@ -1,89 +1,63 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title style="font-weight: bold; text-align: center;">GEOSEGURIDAD</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-weight: bold; text-align: center; background-color: #FF5733;">GEOSEGURIDAD</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="text-align: center;">
+<ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Bienvenido!</ion-card-title>
-      <ion-card-subtitle>Usuario: {{ user }}</ion-card-subtitle>
+      <ion-card-title style="text-align: center;">Datos del Usuario</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <p>Información Adicional</p>
-      
-      <form [formGroup]="formularioPerfil" (ngSubmit)="mostrar()">
-        <mat-form-field appearance="outline">
-          <mat-label>Nombre</mat-label>
-          <input matInput formControlName="nombre">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Apellido</mat-label>
-          <input matInput formControlName="apellido">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Nombre de Usuario</mat-label>
-          <input matInput formControlName="nombreUsuario">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Contraseña</mat-label>
-          <input matInput formControlName="contrasena" type="password">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Correo</mat-label>
-          <input matInput formControlName="correo">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Nombre de Empresa</mat-label>
-          <input matInput formControlName="nombreEmpresa">
-        </mat-form-field>        
-
-        <mat-form-field appearance="outline">
-          <mat-label>Fecha de Nacimiento</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
-        <ion-row>
-          <ion-col>
-            <ion-button color="medium" (click)="limpiar()">Limpiar</ion-button>
-          </ion-col>     
-        </ion-row>
-
-        <div style="text-align: center; height: auto;">
-          <ion-img src="\assets\Skull2.png" alt="Perfil"></ion-img>
-        </div>
-
+      <form [formGroup]="formularioPerfil" (ngSubmit)="guardarCambios()">
+        <ion-item>
+          <ion-label position="floating">Usuario</ion-label>
+          <ion-input id="user" formControlName="user"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input id="password" type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input id="email" type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Dirección</ion-label>
+          <ion-input id="direccion" formControlName="direccion"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input id="nombre" formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Apellidos</ion-label>
+          <ion-input id="apellidos" formControlName="apellidos"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre Empresa</ion-label>
+          <ion-input id="nombreEmpresa" formControlName="nombreEmpresa"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha de Nacimiento</ion-label>
+          <ion-input id="fechaNacimiento" type="date" formControlName="fechaNacimiento"></ion-input>
+        </ion-item>
+        <ion-button type="submit" [disabled]="formularioPerfil.invalid">Guardar Cambios</ion-button>
+        <ion-button (click)="cancelar()">Cancelar</ion-button>
       </form>
+      
+      <br>
     </ion-card-content>
   </ion-card>
-
-  <ion-tabs style="margin-bottom: 0%;">
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="asistencia" [routerLink]="['/asistencia']">
-        <ion-icon name="alarm"></ion-icon>
-        Asistencia
-      </ion-tab-button>
-      <ion-tab-button tab="historial" [routerLink]="['/historial']">
-        <ion-icon name="document-text"></ion-icon>
-        Historial
-      </ion-tab-button>
-      <ion-tab-button tab="perfil" [routerLink]="['/perfil']">
-        <ion-icon name="person"></ion-icon>
-        Perfil
-      </ion-tab-button>
-      <ion-tab-button (click)="cerrarSesion()">
-        <ion-icon name="log-out"></ion-icon>
-        Cerrar sesión
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>© 2024 Italo González</ion-title>
+  </ion-toolbar>
+</ion-footer>

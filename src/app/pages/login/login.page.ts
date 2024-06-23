@@ -1,59 +1,49 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { trigger, transition, style, animate } from '@angular/animations';
-
+import { AuthService } from 'src/app/services/auth/auth-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  animations: [
-    trigger('slideAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateY(-100%)', opacity: 0 }),
-        animate('300ms ease-out', style({ transform: 'translateY(0%)', opacity: 1 })),
-      ]),
-    ]),
-  ],
 })
-  
 export class LoginPage {
   formularioLogin: FormGroup;
-  showSuccess: boolean = false;
-  mostrarFormulario = true;
 
   constructor(
-    private navCtrl: NavController,
-    private formBuilder: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private navCtrl: NavController
   ) {
-    this.formularioLogin = this.formBuilder.group({
-      user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(8), Validators.pattern('^[a-zA-Z0-9]*$')]],
-      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]*$')]]
+    // Inicializa el formulario en el constructor
+    this.formularioLogin = this.fb.group({
+      user: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
-  ingresar() {
-    if (this.formularioLogin.valid) {
-      const user = this.formularioLogin.get('user')?.value;
-      const password = this.formularioLogin.get('password')?.value;
+  iniciarSesion() {
+    const user = this.formularioLogin.get('user')?.value;
+    const password = this.formularioLogin.get('password')?.value;
 
-      // Mostrar el ticket verde
-      this.showSuccess = true;
+    // Verificar las credenciales usando AuthService
+    const loggedIn = this.authService.login(user, password);
 
-      // Transferir datos a la página Home
-      this.navCtrl.navigateForward(['/perfil'], {
-        queryParams: {
-          user: user,
-          password: password
-        }
-      });
+    if (loggedIn) {
+      // Redirigir a la página de asistencia si el inicio de sesión es exitoso
+      this.navCtrl.navigateForward('/asistencia');
     } else {
-      console.log('Formulario inválido');
+      console.log('Credenciales inválidas');
+      // Puedes manejar el caso de credenciales inválidas aquí
     }
   }
 
-  registrar() {
-    this.navCtrl.navigateForward(['/register']);
+  navigateToRegister() {
+    this.navCtrl.navigateForward('/register'); // Ajusta la ruta según tu estructura
   }
 }
+
+
