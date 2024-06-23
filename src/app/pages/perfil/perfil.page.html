@@ -1,13 +1,88 @@
-<ion-header [translucent]="true">
+<ion-content class="ion-text-center">
   <ion-toolbar>
-    <ion-title>perfil</ion-title>
+    <ion-title>GEOSEGURIDAD</ion-title>
   </ion-toolbar>
-</ion-header>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bienvenido!</ion-card-title>
+      <ion-card-subtitle>Usuario: {{ user }}</ion-card-subtitle>
+    </ion-card-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-card-content>
+      <h2>Información Adicional</h2>
+      <form [formGroup]="formularioPerfil">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre de Usuario</mat-label>
+          <input matInput formControlName="nombreUsuario">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="contrasena" type="password">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correo">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre de Empresa</mat-label>
+          <input matInput formControlName="nombreEmpresa">
+        </mat-form-field>        
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <ion-row>
+          <ion-col>
+            <ion-button color="medium" (click)="limpiar()">Limpiar</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="primary" (click)="mostrar()">Mostrar</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div style="text-align: center; height: auto;">
+          <ion-img src="\assets\Skull2.png" alt="Perfil"></ion-img>
+        </div>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-tabs style="margin-bottom: 0%;">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="asistencia" [routerLink]="['/asistencia']">
+        <ion-icon name="alarm"></ion-icon>
+        Asistencia
+      </ion-tab-button>
+      <ion-tab-button tab="historial" [routerLink]="['/historial']">
+        <ion-icon name="document-text"></ion-icon>
+        Historial
+      </ion-tab-button>
+      <ion-tab-button tab="perfil" [routerLink]="['/perfil']">
+        <ion-icon name="person"></ion-icon>
+        Perfil
+      </ion-tab-button>
+      <ion-tab-button (click)="cerrarSesion()">
+        <ion-icon name="log-out"></ion-icon>
+        Cerrar sesión
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>

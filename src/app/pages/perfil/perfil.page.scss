@@ -1,0 +1,22 @@
+ion-item {
+    --highlight-height: 0;
+    --min-height: 60px;
+    --padding-start: 16px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-form-field .mat-form-field-wrapper {
+    padding-bottom: 0.25em;
+  }
+  
+  .mat-datepicker-toggle .mat-icon-button {
+    color: var(--ion-color-primary);
+  }
+  
+  .mat-datepicker-content {
+    background-color: var(--ion-background-color);
+  }
+  
