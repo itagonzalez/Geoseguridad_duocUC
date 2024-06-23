@@ -17,7 +17,12 @@ export class RegisterPage {
     this.formularioRegister = this.formBuilder.group({
       user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(8), Validators.pattern('^[a-zA-Z0-9]*$')]],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]*$')]],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
+      direccion: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      nombreEmpresa: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required]
     });
   }
 
