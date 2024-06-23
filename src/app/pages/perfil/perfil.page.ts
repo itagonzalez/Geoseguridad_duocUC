@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
@@ -34,7 +33,7 @@ export class PerfilPage implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private alertController: AlertController
-    ) {
+  ) {
     this.formularioPerfil = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -55,7 +54,7 @@ export class PerfilPage implements OnInit {
   limpiar() {
     setTimeout(() => {
       this.formularioPerfil.reset();
-    }, 1000); // Tiempo de la animación
+    }, 1000); 
   }
 
   async mostrar() {

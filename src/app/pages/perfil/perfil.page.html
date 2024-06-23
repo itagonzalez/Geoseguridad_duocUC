@@ -1,7 +1,10 @@
-<ion-content class="ion-text-center">
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>GEOSEGURIDAD</ion-title>
+    <ion-title style="font-weight: bold; text-align: center;">GEOSEGURIDAD</ion-title>
   </ion-toolbar>
+</ion-header>
+
+<ion-content style="text-align: center;">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Bienvenido!</ion-card-title>
@@ -9,8 +12,9 @@
     </ion-card-header>
 
     <ion-card-content>
-      <h2>Información Adicional</h2>
-      <form [formGroup]="formularioPerfil">
+      <p>Información Adicional</p>
+      
+      <form [formGroup]="formularioPerfil" (ngSubmit)="mostrar()">
         <mat-form-field appearance="outline">
           <mat-label>Nombre</mat-label>
           <input matInput formControlName="nombre">
@@ -51,10 +55,7 @@
         <ion-row>
           <ion-col>
             <ion-button color="medium" (click)="limpiar()">Limpiar</ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button color="primary" (click)="mostrar()">Mostrar</ion-button>
-          </ion-col>
+          </ion-col>     
         </ion-row>
 
         <div style="text-align: center; height: auto;">

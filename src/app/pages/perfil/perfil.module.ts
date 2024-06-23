@@ -7,13 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-
 import { IonicModule } from '@ionic/angular';
-
+import { PerfilPage } from './perfil.page';
 import { PerfilPageRoutingModule } from './perfil-routing.module';
-
-import { PerfilPage } from './perfil.page'; 
 
 @NgModule({
   imports: [
@@ -21,15 +17,15 @@ import { PerfilPage } from './perfil.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    PerfilPageRoutingModule,
     MatSliderModule,
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    PerfilPageRoutingModule
   ],
-  declarations: [PerfilPage],
-  exports: [PerfilPage] 
+  declarations: [PerfilPage]
 })
 export class PerfilPageModule {}
+
