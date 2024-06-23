@@ -14,7 +14,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      <form [formGroup]="formularioRegister">
+      <form [formGroup]="formularioRegister" (ngSubmit)="registrar()">
         <ion-item>
           <ion-label position="stacked">Nombre de Usuario</ion-label>
           <ion-input formControlName="user"></ion-input>
@@ -79,11 +79,15 @@
           La fecha de nacimiento es obligatoria y debe tener el formato correcto.
         </ion-note>
         
+        <!-- Mensaje de éxito -->
+        <ion-note color="success" *ngIf="registroExitoso">
+          Usuario registrado correctamente.
+        </ion-note>
+        
+        <br>
+        <ion-button color="medium" expand="block" type="submit" [disabled]="formularioRegister.invalid">Registrar</ion-button>
+        <ion-button color="light" expand="block" (click)="goBack()">Volver</ion-button>
       </form>
-      <br>
-
-      <ion-button color="medium" (click)="registrar()" [disabled]="formularioRegister.invalid">Registrar</ion-button>
-      <ion-button color="light" (click)="goBack()">Volver</ion-button>
     </ion-card-content>
   </ion-card>
 
@@ -92,7 +96,6 @@
   </div>
 
 </ion-content>
-
 
 <ion-footer>
   <ion-toolbar>

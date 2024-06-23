@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class RegisterPage {
   formularioRegister: FormGroup;
+  registroExitoso: boolean = false; 
 
   constructor(
     private navCtrl: NavController,
@@ -35,8 +36,17 @@ export class RegisterPage {
       // Guardar usuario en alguna base de datos o servicio
       console.log('Usuario registrado:', { user, email });
 
-      // Redirigir al login
-      this.navCtrl.navigateBack(['/login']);
+      // Guardar en localStorage
+      localStorage.setItem('user', user);
+      localStorage.setItem('password', password);
+
+      // Indicar que el registro fue exitoso
+      this.registroExitoso = true;
+
+      // Redirigir al login después de un breve tiempo (simulado)
+      setTimeout(() => {
+        this.navCtrl.navigateBack(['/login']);
+      }, 2000); // Redirige después de 2 segundos (2000 ms)
     } else {
       console.log('Formulario de registro inválido');
     }
