@@ -11,6 +11,9 @@ import { NavController } from '@ionic/angular';
 })
 export class LoginPage {
   formularioLogin: FormGroup;
+  loginError: boolean = false;
+  loginSuccess: boolean = false; 
+  isLoading: boolean = false; 
 
   constructor(
     private fb: FormBuilder,
@@ -25,25 +28,32 @@ export class LoginPage {
     });
   }
 
-  iniciarSesion() {
+  async iniciarSesion() {
     const user = this.formularioLogin.get('user')?.value;
     const password = this.formularioLogin.get('password')?.value;
 
-    // Verificar las credenciales usando AuthService
-    const loggedIn = this.authService.login(user, password);
+    this.isLoading = true; 
 
-    if (loggedIn) {
-      // Redirigir a la página de asistencia si el inicio de sesión es exitoso
-      this.navCtrl.navigateForward('/asistencia');
-    } else {
-      console.log('Credenciales inválidas');
-      // Puedes manejar el caso de credenciales inválidas aquí
-    }
+    setTimeout(() => {
+      // Verificar las credenciales usando AuthService
+      const loggedIn = this.authService.login(user, password);
+
+      this.isLoading = false; 
+
+      if (loggedIn) {
+        this.loginSuccess = true; // Mostrar mensaje de éxito
+        setTimeout(() => {
+          this.navCtrl.navigateForward('/asistencia');
+        }, 1000); 
+      } else {
+        this.loginError = true; 
+        this.loginSuccess = false; 
+        console.log('Credenciales inválidas');
+      }
+    }, 2000); 
   }
 
   navigateToRegister() {
-    this.navCtrl.navigateForward('/register'); // Ajusta la ruta según tu estructura
+    this.navCtrl.navigateForward('/register'); 
   }
 }
-
-

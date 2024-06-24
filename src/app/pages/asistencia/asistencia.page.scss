@@ -1,0 +1,24 @@
+ion-card {
+    margin: 16px;
+  }
+  
+  h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  ion-tab-bar {
+    background-color: #ff5733;
+    color: #fff;
+  
+    ion-tab-button {
+      --color-selected: #ffffff;
+      --color: #ffffff;
+      
+      ion-icon, ion-label {
+        color: #ffffff;
+      }
+    }
+  }
+  
