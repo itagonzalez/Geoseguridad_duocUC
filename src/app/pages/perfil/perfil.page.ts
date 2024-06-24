@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserDataService } from '../../services/data/user-data.service';
+import { Router } from '@angular/router'; // Importar Router para la navegación
 
 @Component({
   selector: 'app-perfil',
@@ -8,44 +7,60 @@ import { UserDataService } from '../../services/data/user-data.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  formularioPerfil: FormGroup;
+  usuario: any = {};
+  modoEdicion: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private userDataService: UserDataService
-  ) {
-    this.formularioPerfil = this.fb.group({
-      user: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      direccion: ['', Validators.required],
-      nombre: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      nombreEmpresa: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required]
-    });
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    // Cargar los datos del usuario existente si hay
-    const userData = this.userDataService.obtenerDatosUsuario();
-    if (userData) {
-      this.formularioPerfil.patchValue(userData);
-    }
+    // Obtener los datos del usuario almacenados en localStorage
+    this.usuario = {
+      user: localStorage.getItem('user'),
+      password: localStorage.getItem('password'),
+      email: localStorage.getItem('email'),
+      direccion: localStorage.getItem('direccion'),
+      nombre: localStorage.getItem('nombre'),
+      apellidos: localStorage.getItem('apellidos'),
+      nombreEmpresa: localStorage.getItem('nombreEmpresa'),
+      fechaNacimiento: localStorage.getItem('fechaNacimiento')
+    };
+  }
+
+  habilitarEdicion() {
+    // Habilitar el modo de edición
+    this.modoEdicion = true;
   }
 
   guardarCambios() {
-    if (this.formularioPerfil.valid) {
-      // Guardar los cambios en el servicio UserDataService
-      this.userDataService.guardarDatosUsuario(this.formularioPerfil.value);
-      console.log('Datos actualizados:', this.formularioPerfil.value);
-    } else {
-      console.error('Formulario inválido');
-    }
+    // Guardar los cambios en localStorage
+    localStorage.setItem('user', this.usuario.user);
+    localStorage.setItem('password', this.usuario.password);
+    localStorage.setItem('email', this.usuario.email);
+    localStorage.setItem('direccion', this.usuario.direccion);
+    localStorage.setItem('nombre', this.usuario.nombre);
+    localStorage.setItem('apellidos', this.usuario.apellidos);
+    localStorage.setItem('nombreEmpresa', this.usuario.nombreEmpresa);
+    localStorage.setItem('fechaNacimiento', this.usuario.fechaNacimiento);
+
+    // Deshabilitar el modo de edición
+    this.modoEdicion = false;
+
+    // Mostrar un mensaje o realizar alguna acción adicional si es necesario
+    console.log('Cambios guardados correctamente.');
   }
 
-  cancelar() {
-    console.log('Edición cancelada');
-    // Implementa la lógica para cancelar la edición según sea necesario
+  cerrarSesion() {
+    // Eliminar todos los datos de usuario del localStorage
+    localStorage.removeItem('user');
+    localStorage.removeItem('password');
+    localStorage.removeItem('email');
+    localStorage.removeItem('direccion');
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('apellidos');
+    localStorage.removeItem('nombreEmpresa');
+    localStorage.removeItem('fechaNacimiento');
+
+    // Redirigir al usuario a la página de inicio de sesión
+    this.router.navigate(['/login']);
   }
 }

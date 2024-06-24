@@ -4,27 +4,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" fullscreen>
-  <div class="cronometro-wrapper">
-    <div class="cronometro-container">
-      <h3>Hola, {{ nombreUsuario }}</h3>
-      <div class="cronometro">
-        <h1>
-          {{ horas | number:'2.0-0' }}:{{ minutos | number:'2.0-0' }}:{{ segundos | number:'2.0-0' }}
-        </h1>
+<main class="mainAsistencia" fullscreen>
+  <ion-card-content class="ion-padding" fullscreen>
+    <div class="cronometro-wrapper">
+      <div class="cronometro-container">
+        <h3>Hola, {{ nombreUsuario }}</h3>
+        <ion-card>
+          <p>{{ currentDate | date:'medium' }}</p>
+        </ion-card>
+        <div class="cronometro">
+          <h1>{{ horas | number:'2.0-0' }}:{{ minutos | number:'2.0-0' }}:{{ segundos | number:'2.0-0' }}</h1>
+        </div>
       </div>
+      <ion-card class="acciones">
+        <ion-card-content>
+          <div class="botones">
+            <ion-button expand="block" (click)="marcarEntrada()">Marcar Entrada</ion-button>
+            <ion-button expand="block" (click)="marcarSalida()">Marcar Salida</ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <p *ngIf="mensaje" style="color: green; text-align: center; margin-top: 16px;">
+        {{ mensaje }}
+      </p>
     </div>
-    <ion-card class="acciones">
-      <ion-card-content>
-        <ion-button expand="block" (click)="marcarEntrada()">Marcar Entrada</ion-button>
-        <ion-button expand="block" (click)="marcarSalida()">Marcar Salida</ion-button>
-        <p *ngIf="mensaje" style="color: green; text-align: center; margin-top: 16px;">
-          {{ mensaje }}
-        </p>
-      </ion-card-content>
-    </ion-card>
-  </div>
-</ion-content>
+  </ion-card-content>
+</main>
 
 <ion-footer>
   <ion-toolbar style="background-color: #ff5733;">

@@ -1,63 +1,132 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" style="background-color: #ff5733; text-align: center; ">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/login"></ion-back-button>
+    <ion-title style="font-weight: bold; text-align: center;">GEOSEGURIDAD</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="habilitarEdicion()" *ngIf="!modoEdicion">Editar</ion-button>
+      <ion-button (click)="guardarCambios()" *ngIf="modoEdicion">Guardar Cambios</ion-button>
     </ion-buttons>
-    <ion-title style="font-weight: bold; text-align: center; background-color: #FF5733;">GEOSEGURIDAD</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title style="text-align: center;">Datos del Usuario</ion-card-title>
+      <ion-card-title style="text-align: center;">Datos Personales</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <form [formGroup]="formularioPerfil" (ngSubmit)="guardarCambios()">
+      <div *ngIf="modoEdicion">
+        <form (ngSubmit)="guardarCambios()">
+          <ion-item>
+            <ion-label position="stacked">Nombre de Usuario</ion-label>
+            <ion-input [(ngModel)]="usuario.user" name="user" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-input [(ngModel)]="usuario.nombre" name="nombre" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Apellidos</ion-label>
+            <ion-input [(ngModel)]="usuario.apellidos" name="apellidos" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input [(ngModel)]="usuario.password" name="password" type="password" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Correo Electrónico</ion-label>
+            <ion-input [(ngModel)]="usuario.email" name="email" type="email" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Dirección Particular</ion-label>
+            <ion-input [(ngModel)]="usuario.direccion" name="direccion" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Nombre Empresa</ion-label>
+            <ion-input [(ngModel)]="usuario.nombreEmpresa" name="nombreEmpresa" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Fecha de Nacimiento</ion-label>
+            <ion-input [(ngModel)]="usuario.fechaNacimiento" name="fechaNacimiento" type="date" required></ion-input>
+          </ion-item>
+
+          <ion-button type="submit" expand="block">Guardar Cambios</ion-button>
+        </form>
+      </div>
+
+      <div *ngIf="!modoEdicion">
         <ion-item>
-          <ion-label position="floating">Usuario</ion-label>
-          <ion-input id="user" formControlName="user"></ion-input>
+          <ion-label position="stacked">Nombre de Usuario</ion-label>
+          <ion-input [readonly]="true" value="{{ usuario.user }}"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input id="password" type="password" formControlName="password"></ion-input>
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input [readonly]="true" value="{{ usuario.nombre }}"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input id="email" type="email" formControlName="email"></ion-input>
+          <ion-label position="stacked">Apellidos</ion-label>
+          <ion-input [readonly]="true" value="{{ usuario.apellidos }}"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label position="floating">Dirección</ion-label>
-          <ion-input id="direccion" formControlName="direccion"></ion-input>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input [readonly]="true" type="password" value="{{ usuario.password }}"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input id="nombre" formControlName="nombre"></ion-input>
+          <ion-label position="stacked">Correo Electrónico</ion-label>
+          <ion-input [readonly]="true" type="email" value="{{ usuario.email }}"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label position="floating">Apellidos</ion-label>
-          <ion-input id="apellidos" formControlName="apellidos"></ion-input>
+          <ion-label position="stacked">Dirección Particular</ion-label>
+          <ion-input [readonly]="true" value="{{ usuario.direccion }}"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label position="floating">Nombre Empresa</ion-label>
-          <ion-input id="nombreEmpresa" formControlName="nombreEmpresa"></ion-input>
+          <ion-label position="stacked">Nombre Empresa</ion-label>
+          <ion-input [readonly]="true" value="{{ usuario.nombreEmpresa }}"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label position="floating">Fecha de Nacimiento</ion-label>
-          <ion-input id="fechaNacimiento" type="date" formControlName="fechaNacimiento"></ion-input>
+          <ion-label position="stacked">Fecha de Nacimiento</ion-label>
+          <ion-input [readonly]="true" type="date" value="{{ usuario.fechaNacimiento }}"></ion-input>
         </ion-item>
-        <ion-button type="submit" [disabled]="formularioPerfil.invalid">Guardar Cambios</ion-button>
-        <ion-button (click)="cancelar()">Cancelar</ion-button>
-      </form>
-      
-      <br>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <ion-title>© 2024 Italo González</ion-title>
+  <ion-toolbar style="background-color: #ff5733;">
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" style="background-color: #ff5733;">
+        <ion-tab-button tab="asistencia" [routerLink]="['/asistencia']">
+          <ion-icon name="alarm-outline"></ion-icon>
+          <ion-label>Asistencia</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="historial" [routerLink]="['/historial']">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <ion-label>Historial</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="perfil" [routerLink]="['/perfil']">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="cerrarSesion()">
+          <ion-icon name="log-out-outline"></ion-icon>
+          <ion-label>Cerrar sesión</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
   </ion-toolbar>
 </ion-footer>
