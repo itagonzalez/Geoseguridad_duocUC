@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header style="background-color: #ff5733" [translucent]="true">
   <ion-toolbar>
     <ion-title style="font-weight: bold; text-align: center; background-color: #ff5733">
       GEOSEGURIDAD
@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card *ngIf="!isLoading">
     <ion-card-header>
       <ion-card-title style="text-align: center">¡BIENVENIDO!</ion-card-title>
     </ion-card-header>
@@ -28,18 +28,29 @@
         <ion-button expand="block" type="submit" [disabled]="formularioLogin.invalid">Ingresar</ion-button>
       </form>
       <br />
+      <p *ngIf="loginError" style="color: red; text-align: center;">
+        Credenciales inválidas, por favor intenta de nuevo.
+      </p>
+      <p *ngIf="loginSuccess" style="color: green; text-align: center;">
+        Inicio de sesión exitoso.
+      </p>
       <p style="text-align: center">
         <ion-button color="primary" fill="clear" (click)="navigateToRegister()">Crea tu cuenta aquí!</ion-button>
       </p>
     </ion-card-content>
   </ion-card>
 
+  <div class="loading-container" *ngIf="isLoading">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando...</p>
+  </div>
+
   <div style="text-align: center; height: auto">
     <ion-img src="/assets/Skull.png" alt="Perfil"></ion-img>
   </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer style="background-color: #ff5733">
   <ion-toolbar>
     <ion-title style="background-color: #ff5733">© 2024 Italo González</ion-title>
   </ion-toolbar>

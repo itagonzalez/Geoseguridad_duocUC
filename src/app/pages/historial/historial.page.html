@@ -1,13 +1,18 @@
-<ion-header [translucent]="true">
+<ion-header style="background-color: #ff5733" [translucent]="true">
   <ion-toolbar>
-    <ion-title>historial</ion-title>
+    <ion-title style="font-weight: bold; text-align: center; background-color: #ff5733;">
+      Historial
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">historial</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let registro of historial">
+      <ion-label>
+        Entrada: {{ registro.entrada }}<br>
+        Salida: {{ registro.salida }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
