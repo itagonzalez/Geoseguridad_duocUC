@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class RegisterPage {
   formularioRegister: FormGroup;
-  registroExitoso: boolean = false; 
+  registroExitoso: boolean = false;
 
   constructor(
     private navCtrl: NavController,
@@ -33,12 +33,17 @@ export class RegisterPage {
       const password = this.formularioRegister.get('password')?.value;
       const email = this.formularioRegister.get('email')?.value;
 
-      // Guardar usuario en alguna base de datos o servicio
-      console.log('Usuario registrado:', { user, email });
-
-      // Guardar en localStorage
+      // Guardar todos los datos del formulario en localStorage
       localStorage.setItem('user', user);
       localStorage.setItem('password', password);
+      localStorage.setItem('email', email);
+
+      // Guardar los demás campos en localStorage
+      localStorage.setItem('direccion', this.formularioRegister.get('direccion')?.value);
+      localStorage.setItem('nombre', this.formularioRegister.get('nombre')?.value);
+      localStorage.setItem('apellidos', this.formularioRegister.get('apellidos')?.value);
+      localStorage.setItem('nombreEmpresa', this.formularioRegister.get('nombreEmpresa')?.value);
+      localStorage.setItem('fechaNacimiento', this.formularioRegister.get('fechaNacimiento')?.value);
 
       // Indicar que el registro fue exitoso
       this.registroExitoso = true;

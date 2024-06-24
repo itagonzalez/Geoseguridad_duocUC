@@ -1,5 +1,35 @@
-ion-header, ion-toolbar, ion-title {
-    background-color: #ff5733 !important;
-    color: #fff !important;
-  }
-  
+.mainHistorial {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #ff5733;
+  color: white;
+}
+
+
+h2 {
+  text-align: center;
+  color: #ff5733;
+  margin-top: 20px;
+}
