@@ -7,64 +7,68 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./asistencia.page.scss'],
 })
 export class AsistenciaPage {
-  mensaje: string = '';
-  cronometro: any;
-  tiempo: number = 0;
   horas: number = 0;
   minutos: number = 0;
   segundos: number = 0;
-  entrada: string | null = null;
+  mensaje: string = '';
+  nombreUsuario: string = '';
 
-  constructor(private navCtrl: NavController) {}
+  interval: any;
 
+  constructor(private navCtrl: NavController) {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.nombreUsuario = storedUser;
+    } else {
+      this.nombreUsuario = 'Usuario Invitado'; 
+    }
+  }
+
+  // Función para marcar la entrada
   marcarEntrada() {
-    if (!this.entrada) {
-      this.entrada = new Date().toLocaleTimeString();
-      this.mensaje = `Entrada registrada a las ${this.entrada}`;
-      this.iniciarCronometro();
-    }
+    this.detenerCronometro(); // Detener cronómetro si está en marcha
+    this.iniciarCronometro(); // Iniciar el cronómetro desde cero
+    this.mensaje = 'Entrada Registrada'; // Mostrar mensaje de entrada registrada
+    setTimeout(() => {
+      this.mensaje = ''; // Limpiar mensaje después de 3 segundos
+    }, 3000);
   }
 
+  // Función para marcar la salida
   marcarSalida() {
-    if (this.entrada) {
-      const salida = new Date().toLocaleTimeString();
-      this.mensaje = `Salida registrada a las ${salida}`;
-      this.detenerCronometro();
-      this.guardarHistorial(this.entrada, salida);
-      this.entrada = null; // Reset entrada
-    }
+    this.detenerCronometro(); // Detener el cronómetro
+    this.horas = 0; // Reiniciar horas
+    this.minutos = 0; // Reiniciar minutos
+    this.segundos = 0; // Reiniciar segundos
+    this.mensaje = 'Salida Registrada'; // Mostrar mensaje de salida registrada
+    setTimeout(() => {
+      this.mensaje = ''; // Limpiar mensaje después de 3 segundos
+    }, 3000);
   }
 
+  // Función para iniciar el cronómetro
   iniciarCronometro() {
-    this.resetCronometro();
-    this.cronometro = setInterval(() => {
-      this.tiempo++;
-      this.horas = Math.floor(this.tiempo / 3600);
-      this.minutos = Math.floor((this.tiempo % 3600) / 60);
-      this.segundos = this.tiempo % 60;
+    this.interval = setInterval(() => {
+      this.segundos++;
+      if (this.segundos === 60) {
+        this.segundos = 0;
+        this.minutos++;
+      }
+      if (this.minutos === 60) {
+        this.minutos = 0;
+        this.horas++;
+      }
     }, 1000);
   }
 
+  // Función para detener el cronómetro
   detenerCronometro() {
-    clearInterval(this.cronometro);
-    this.resetCronometro();
+    clearInterval(this.interval);
   }
 
-  resetCronometro() {
-    this.tiempo = 0;
-    this.horas = 0;
-    this.minutos = 0;
-    this.segundos = 0;
-  }
-
-  guardarHistorial(entrada: string, salida: string) {
-    const historial = JSON.parse(localStorage.getItem('historial') || '[]');
-    historial.push({ entrada, salida });
-    localStorage.setItem('historial', JSON.stringify(historial));
-  }
-
+  // Función para cerrar sesión
   cerrarSesion() {
-    localStorage.clear();
-    this.navCtrl.navigateRoot('/login');
+    localStorage.clear(); // Limpiar datos almacenados localmente
+    this.navCtrl.navigateRoot('/login'); // Navegar de regreso a la página de login
   }
 }

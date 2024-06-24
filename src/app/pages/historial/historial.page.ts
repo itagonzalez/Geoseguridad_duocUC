@@ -16,3 +16,4 @@ export class HistorialPage {
     this.historial = JSON.parse(localStorage.getItem('historial') || '[]');
   }
 }
+
