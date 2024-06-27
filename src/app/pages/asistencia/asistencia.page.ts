@@ -20,7 +20,6 @@ export class AsistenciaPage implements OnInit {
 
   ngOnInit() {
     this.nombreUsuario = localStorage.getItem('user') || 'Usuario';
-    // No inicia el cronómetro automáticamente en la inicialización
   }
 
   startCronometro() {
@@ -58,8 +57,7 @@ export class AsistenciaPage implements OnInit {
     setTimeout(() => (this.mensaje = ''), 3000);
   }
 
-  cerrarSesion() {
-    localStorage.removeItem('user');
+  cerrarSesion() {    
     this.router.navigate(['/login']);
   }
 }
