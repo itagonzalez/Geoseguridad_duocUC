@@ -43,7 +43,7 @@ export class LoginPage {
       if (loggedIn) {
         this.loginSuccess = true; // Mostrar mensaje de éxito
         setTimeout(() => {
-          this.navCtrl.navigateForward('/asistencia');
+          this.navCtrl.navigateForward('/attendance');
         }, 1000); 
       } else {
         this.loginError = true; 

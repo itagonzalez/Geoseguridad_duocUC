@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { RegistrarHistorialService } from '../../services/historial/registrar-historial.service';
 
 @Component({
-  selector: 'app-asistencia',
-  templateUrl: './asistencia.page.html',
-  styleUrls: ['./asistencia.page.scss'],
+  selector: 'app-attendance',
+  templateUrl: './attendance.page.html',
+  styleUrls: ['./attendance.page.scss'],
 })
-export class AsistenciaPage implements OnInit {
+export class AttendancePage implements OnInit {
   nombreUsuario: string = '';
   currentDate: Date = new Date();
   mensaje: string = '';
@@ -52,7 +52,7 @@ export class AsistenciaPage implements OnInit {
     const salida = new Date();
     this.historialService.agregarMarca(null, salida);
     clearInterval(this.timer);
-    this.timer = null; // Reinicia el timer a null cuando se marca salida
+    this.timer = null; 
     this.mensaje = 'Salida registrada';
     setTimeout(() => (this.mensaje = ''), 3000);
   }

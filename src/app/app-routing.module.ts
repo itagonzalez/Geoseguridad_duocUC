@@ -16,8 +16,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
   {
-    path: 'asistencia',
-    loadChildren: () => import('./pages/asistencia/asistencia.module').then(m => m.AsistenciaPageModule)
+    path: 'Attendance',
+    loadChildren: () => import('./pages/attendance/attendance.module').then(m => m.AttendancePageModule)
   },
   {
     path: 'perfil',
