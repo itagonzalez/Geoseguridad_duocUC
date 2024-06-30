@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title style="font-weight: bold; text-align: center;">GEOSEGURIDAD</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="habilitarEdicion()" *ngIf="!modoEdicion">Editar</ion-button>
-      <ion-button (click)="guardarCambios()" *ngIf="modoEdicion">Guardar Cambios</ion-button>
+      <ion-button (click)="enableEdit()" *ngIf="!editMode">Editar</ion-button>
+      <ion-button (click)="saveChanges()" *ngIf="editMode">Guardar Cambios</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,91 +15,91 @@
     </ion-card-header>
 
     <ion-card-content>
-      <div *ngIf="modoEdicion">
-        <form (ngSubmit)="guardarCambios()">
+      <div *ngIf="editMode">
+        <form (ngSubmit)="saveChanges()">
           <ion-item>
             <ion-label position="stacked">Nombre de Usuario</ion-label>
-            <ion-input [(ngModel)]="usuario.user" name="user" required></ion-input>
+            <ion-input [(ngModel)]="user.user" name="user" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Nombre</ion-label>
-            <ion-input [(ngModel)]="usuario.nombre" name="nombre" required></ion-input>
+            <ion-input [(ngModel)]="user.name" name="name" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Apellidos</ion-label>
-            <ion-input [(ngModel)]="usuario.apellidos" name="apellidos" required></ion-input>
+            <ion-input [(ngModel)]="user.lastName" name="lastName" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Contraseña</ion-label>
-            <ion-input [(ngModel)]="usuario.password" name="password" type="password" required></ion-input>
+            <ion-input [(ngModel)]="user.password" name="password" type="password" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Correo Electrónico</ion-label>
-            <ion-input [(ngModel)]="usuario.email" name="email" type="email" required></ion-input>
+            <ion-input [(ngModel)]="user.email" name="email" type="email" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Dirección Particular</ion-label>
-            <ion-input [(ngModel)]="usuario.direccion" name="direccion" required></ion-input>
+            <ion-input [(ngModel)]="user.address" name="address" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Nombre Empresa</ion-label>
-            <ion-input [(ngModel)]="usuario.nombreEmpresa" name="nombreEmpresa" required></ion-input>
+            <ion-input [(ngModel)]="user.companyName" name="companyName" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Fecha de Nacimiento</ion-label>
-            <ion-input [(ngModel)]="usuario.fechaNacimiento" name="fechaNacimiento" type="date" required></ion-input>
+            <ion-input [(ngModel)]="user.dateBirth" name="dateBirth" type="date" required></ion-input>
           </ion-item>
 
           <ion-button type="submit" expand="block">Guardar Cambios</ion-button>
         </form>
       </div>
 
-      <div *ngIf="!modoEdicion">
+      <div *ngIf="!editMode">
         <ion-item>
           <ion-label position="stacked">Nombre de Usuario</ion-label>
-          <ion-input [readonly]="true" value="{{ usuario.user }}"></ion-input>
+          <ion-input [readonly]="true" value="{{ user.user }}"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Nombre</ion-label>
-          <ion-input [readonly]="true" value="{{ usuario.nombre }}"></ion-input>
+          <ion-input [readonly]="true" value="{{ user.name }}"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Apellidos</ion-label>
-          <ion-input [readonly]="true" value="{{ usuario.apellidos }}"></ion-input>
+          <ion-input [readonly]="true" value="{{ user.lastName }}"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Contraseña</ion-label>
-          <ion-input [readonly]="true" type="password" value="{{ usuario.password }}"></ion-input>
+          <ion-input [readonly]="true" type="password" value="{{ user.password }}"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Correo Electrónico</ion-label>
-          <ion-input [readonly]="true" type="email" value="{{ usuario.email }}"></ion-input>
+          <ion-input [readonly]="true" type="email" value="{{ user.email }}"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Dirección Particular</ion-label>
-          <ion-input [readonly]="true" value="{{ usuario.direccion }}"></ion-input>
+          <ion-input [readonly]="true" value="{{ user.address }}"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Nombre Empresa</ion-label>
-          <ion-input [readonly]="true" value="{{ usuario.nombreEmpresa }}"></ion-input>
+          <ion-input [readonly]="true" value="{{ user.companyName }}"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Fecha de Nacimiento</ion-label>
-          <ion-input [readonly]="true" type="date" value="{{ usuario.fechaNacimiento }}"></ion-input>
+          <ion-input [readonly]="true" type="date" value="{{ user.dateBirth }}"></ion-input>
         </ion-item>
       </div>
     </ion-card-content>
@@ -114,15 +114,15 @@
           <ion-icon name="alarm-outline"></ion-icon>
           <ion-label>Asistencia</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="historial" [routerLink]="['/historial']">
+        <ion-tab-button tab="history" [routerLink]="['/history']">
           <ion-icon name="document-text-outline"></ion-icon>
           <ion-label>Historial</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="perfil" [routerLink]="['/perfil']">
+        <ion-tab-button tab="profile" [routerLink]="['/profile']">
           <ion-icon name="person-outline"></ion-icon>
           <ion-label>Perfil</ion-label>
         </ion-tab-button>
-        <ion-tab-button (click)="cerrarSesion()">
+        <ion-tab-button (click)="logOut()">
           <ion-icon name="log-out-outline"></ion-icon>
           <ion-label>Cerrar sesión</ion-label>
         </ion-tab-button>

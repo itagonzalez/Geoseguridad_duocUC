@@ -6,26 +6,26 @@
 
 <main class="mainAttendance" fullscreen>
   <ion-card-content class="ion-padding" fullscreen>
-    <div class="cronometro-wrapper">
-      <div class="cronometro-container">
-        <h3>Hola, {{ nombreUsuario }}</h3>
+    <div class="timer-wrapper">
+      <div class="timer-container">
+        <h3>Hola, {{ userName }}</h3>
         <ion-card>
           <p>{{ currentDate | date:'medium' }}</p>
         </ion-card>
-        <div class="cronometro">
-          <h1>{{ horas | number:'2.0-0' }}:{{ minutos | number:'2.0-0' }}:{{ segundos | number:'2.0-0' }}</h1>
+        <div class="timer">
+          <h1>{{ hours | number:'2.0-0' }}:{{ minutes | number:'2.0-0' }}:{{ sec | number:'2.0-0' }}</h1>
         </div>
       </div>
-      <ion-card class="acciones">
+      <ion-card class="actions">
         <ion-card-content>
-          <div class="botones">
-            <ion-button expand="block" (click)="marcarEntrada()">Marcar Entrada</ion-button>
-            <ion-button expand="block" (click)="marcarSalida()">Marcar Salida</ion-button>
+          <div class="buttons">
+            <ion-button expand="block" (click)="checkIn()">Marcar Entrada</ion-button>
+            <ion-button expand="block" (click)="checkOut()">Marcar Salida</ion-button>
           </div>
         </ion-card-content>
       </ion-card>
-      <p *ngIf="mensaje" style="color: green; text-align: center; margin-top: 16px;">
-        {{ mensaje }}
+      <p *ngIf="message" style="color: green; text-align: center; margin-top: 16px;">
+        {{ message }}
       </p>
     </div>
   </ion-card-content>
@@ -39,15 +39,15 @@
           <ion-icon name="alarm-outline"></ion-icon>
           <ion-label>Asistencia</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="historial" [routerLink]="['/historial']">
+        <ion-tab-button tab="history" [routerLink]="['/history']">
           <ion-icon name="document-text-outline"></ion-icon>
           <ion-label>Historial</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="perfil" [routerLink]="['/perfil']">
+        <ion-tab-button tab="profile" [routerLink]="['/profile']">
           <ion-icon name="person-outline"></ion-icon>
           <ion-label>Perfil</ion-label>
         </ion-tab-button>
-        <ion-tab-button (click)="cerrarSesion()">
+        <ion-tab-button (click)="logOut()">
           <ion-icon name="log-out-outline"></ion-icon>
           <ion-label>Cerrar sesión</ion-label>
         </ion-tab-button>

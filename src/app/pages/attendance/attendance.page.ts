@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegistrarHistorialService } from '../../services/historial/registrar-historial.service';
+import { RegisterHistoryService } from '../../services/history/register-history.service';
 
 @Component({
   selector: 'app-attendance',
@@ -8,56 +8,56 @@ import { RegistrarHistorialService } from '../../services/historial/registrar-hi
   styleUrls: ['./attendance.page.scss'],
 })
 export class AttendancePage implements OnInit {
-  nombreUsuario: string = '';
+  userName: string = '';
   currentDate: Date = new Date();
-  mensaje: string = '';
-  horas: number = 0;
-  minutos: number = 0;
-  segundos: number = 0;
+  message: string = '';
+  hours: number = 0;
+  minutes: number = 0;
+  sec: number = 0;
   timer: any;
 
-  constructor(private router: Router, private historialService: RegistrarHistorialService) {}
+  constructor(private router: Router, private historyService: RegisterHistoryService) {}
 
   ngOnInit() {
-    this.nombreUsuario = localStorage.getItem('user') || 'Usuario';
+    this.userName = localStorage.getItem('user') || 'user';
   }
 
-  startCronometro() {
+  startTimer() {
     this.timer = setInterval(() => {
-      this.segundos++;
-      if (this.segundos === 60) {
-        this.segundos = 0;
-        this.minutos++;
+      this.sec++;
+      if (this.sec === 60) {
+        this.sec = 0;
+        this.minutes++;
       }
-      if (this.minutos === 60) {
-        this.minutos = 0;
-        this.horas++;
+      if (this.minutes === 60) {
+        this.minutes = 0;
+        this.hours++;
       }
     }, 1000);
   }
 
-  marcarEntrada() {
+  checkIn() {
     // Inicia el cronómetro al marcar entrada si no está iniciado
     if (!this.timer) {
-      this.startCronometro();
+      this.startTimer();
     }
 
-    const entrada = new Date();
-    this.historialService.agregarMarca(entrada, null);
-    this.mensaje = 'Entrada registrada';
-    setTimeout(() => (this.mensaje = ''), 3000);
+    const checkIn = new Date();
+    this.historyService.addTimestamps(checkIn, null);
+    this.message = 'Entrada registrada';
+    setTimeout(() => (this.message = ''), 3000);
   }
 
-  marcarSalida() {
-    const salida = new Date();
-    this.historialService.agregarMarca(null, salida);
+  checkOut() {
+    const checkOut = new Date();
+    this.historyService.addTimestamps(null, checkOut);
     clearInterval(this.timer);
     this.timer = null; 
-    this.mensaje = 'Salida registrada';
-    setTimeout(() => (this.mensaje = ''), 3000);
+    this.message = 'Salida registrada';
+    setTimeout(() => (this.message = ''), 3000);
   }
 
-  cerrarSesion() {    
+  logOut() {    
     this.router.navigate(['/login']);
   }
 }
