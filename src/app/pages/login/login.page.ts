@@ -10,7 +10,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-  formularioLogin: FormGroup;
+  formLogin: FormGroup;
   loginError: boolean = false;
   loginSuccess: boolean = false; 
   isLoading: boolean = false; 
@@ -22,15 +22,15 @@ export class LoginPage {
     private navCtrl: NavController
   ) {
     // Inicializa el formulario en el constructor
-    this.formularioLogin = this.fb.group({
+    this.formLogin = this.fb.group({
       user: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
-  async iniciarSesion() {
-    const user = this.formularioLogin.get('user')?.value;
-    const password = this.formularioLogin.get('password')?.value;
+  async logIn() {
+    const user = this.formLogin.get('user')?.value;
+    const password = this.formLogin.get('password')?.value;
 
     this.isLoading = true; 
 
@@ -43,7 +43,7 @@ export class LoginPage {
       if (loggedIn) {
         this.loginSuccess = true; // Mostrar mensaje de éxito
         setTimeout(() => {
-          this.navCtrl.navigateForward('/asistencia');
+          this.navCtrl.navigateForward('/attendance');
         }, 1000); 
       } else {
         this.loginError = true; 

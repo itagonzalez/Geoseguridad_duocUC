@@ -8,30 +8,30 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage {
-  formularioRegister: FormGroup;
-  registroExitoso: boolean = false;
+  formRegister: FormGroup;
+  success: boolean = false;
 
   constructor(
     private navCtrl: NavController,
     private formBuilder: FormBuilder
   ) {
-    this.formularioRegister = this.formBuilder.group({
+    this.formRegister = this.formBuilder.group({
       user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(8), Validators.pattern('^[a-zA-Z0-9]*$')]],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]*$')]],
       email: ['', [Validators.required, Validators.email]],
-      direccion: ['', Validators.required],
-      nombre: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      nombreEmpresa: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required]
+      address: ['', Validators.required],
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      companyName: ['', Validators.required],
+      dateBirth: ['', Validators.required]
     });
   }
 
-  registrar() {
-    if (this.formularioRegister.valid) {
-      const user = this.formularioRegister.get('user')?.value;
-      const password = this.formularioRegister.get('password')?.value;
-      const email = this.formularioRegister.get('email')?.value;
+  register() {
+    if (this.formRegister.valid) {
+      const user = this.formRegister.get('user')?.value;
+      const password = this.formRegister.get('password')?.value;
+      const email = this.formRegister.get('email')?.value;
 
       // Guardar todos los datos del formulario en localStorage
       localStorage.setItem('user', user);
@@ -39,14 +39,14 @@ export class RegisterPage {
       localStorage.setItem('email', email);
 
       // Guardar los demás campos en localStorage
-      localStorage.setItem('direccion', this.formularioRegister.get('direccion')?.value);
-      localStorage.setItem('nombre', this.formularioRegister.get('nombre')?.value);
-      localStorage.setItem('apellidos', this.formularioRegister.get('apellidos')?.value);
-      localStorage.setItem('nombreEmpresa', this.formularioRegister.get('nombreEmpresa')?.value);
-      localStorage.setItem('fechaNacimiento', this.formularioRegister.get('fechaNacimiento')?.value);
+      localStorage.setItem('address', this.formRegister.get('address')?.value);
+      localStorage.setItem('name', this.formRegister.get('name')?.value);
+      localStorage.setItem('lastName', this.formRegister.get('lastName')?.value);
+      localStorage.setItem('companyName', this.formRegister.get('companyName')?.value);
+      localStorage.setItem('dateBirth', this.formRegister.get('dateBirth')?.value);
 
       // Indicar que el registro fue exitoso
-      this.registroExitoso = true;
+      this.success = true;
 
       // Redirigir al login después de un breve tiempo (simulado)
       setTimeout(() => {

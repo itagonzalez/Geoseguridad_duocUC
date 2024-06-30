@@ -17,7 +17,7 @@ ion-content {
   height: 100%;
 }
 
-.cronometro-wrapper {
+.timer-wrapper {
   background-color: #000000; 
   padding: 20px;
   border-radius: 12px;
@@ -29,7 +29,7 @@ ion-content {
   margin-bottom: 20px;
 }
 
-.cronometro-container {
+.timer-container {
   width: 100%;
   text-align: center;
 }
@@ -50,21 +50,21 @@ ion-content {
   text-align: center;
 }
 
-.cronometro {
+.timer {
   font-size: 5em; /* Aumentar tamaño del cronómetro */
   font-weight: bold;
   color: #ffffff;
   margin: 20px 0;
 }
 
-.acciones {
+.actions {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.botones {
+.buttons {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -75,7 +75,7 @@ ion-button {
   --background: #ff5733;
 }
 
-.mensaje {
+.message {
   color: green;
   text-align: center;
   margin-top: 16px;

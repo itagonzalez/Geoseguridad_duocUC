@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<main class="mainHistorial" fullscreen>
+<main class="mainHistory" fullscreen>
   <ion-content class="ion-padding" fullscreen>
     <div class="table-wrapper">
       <h2>Historial de Marcas</h2>
@@ -17,10 +17,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let marca of historialMarcas">
-            <td>{{ marca.fecha | date:'shortDate' }}</td>
-            <td>{{ marca.entrada | date:'shortTime' }}</td>
-            <td>{{ marca.salida | date:'shortTime' }}</td>
+          <tr *ngFor="let timestamps of historyTimestamps">
+            <td>{{ timestamps.date | date:'shortDate' }}</td>
+            <td>{{ timestamps.checkIn | date:'shortTime' }}</td>
+            <td>{{ timestamps.checkOut | date:'shortTime' }}</td>
           </tr>
         </tbody>
       </table>
@@ -32,19 +32,19 @@
   <ion-toolbar style="background-color: #ff5733;">
     <ion-tabs>
       <ion-tab-bar slot="bottom" style="background-color: #ff5733;">
-        <ion-tab-button tab="asistencia" [routerLink]="['/asistencia']">
+        <ion-tab-button tab="attendance" [routerLink]="['/attendance']">
           <ion-icon name="alarm-outline"></ion-icon>
           <ion-label>Asistencia</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="historial" [routerLink]="['/historial']">
+        <ion-tab-button tab="history" [routerLink]="['/history']">
           <ion-icon name="document-text-outline"></ion-icon>
           <ion-label>Historial</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="perfil" [routerLink]="['/perfil']">
+        <ion-tab-button tab="profile" [routerLink]="['/profile']">
           <ion-icon name="person-outline"></ion-icon>
           <ion-label>Perfil</ion-label>
         </ion-tab-button>
-        <ion-tab-button (click)="cerrarSesion()">
+        <ion-tab-button (click)="logOut()">
           <ion-icon name="log-out-outline"></ion-icon>
           <ion-label>Cerrar sesión</ion-label>
         </ion-tab-button>
