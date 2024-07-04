@@ -4,14 +4,6 @@ ion-title {
   color: #ffffff;
 }
 
-ion-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
 .timer-wrapper {
   background-color: #000000; 
   padding: 20px;
@@ -77,4 +69,11 @@ ion-button {
   font-size: 1.5em; /* Incrementar tamaño del mensaje */
 }
 
+.mainattendance {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
 
