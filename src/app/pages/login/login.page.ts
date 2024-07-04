@@ -34,11 +34,10 @@ export class LoginPage {
 
     this.isLoading = true; 
 
-    setTimeout(() => {
-      // Verificar las credenciales usando AuthService
-      const loggedIn = this.authService.login(user, password);
+    try {
+      const loggedIn = await this.authService.login(user, password);
 
-      this.isLoading = false; 
+      this.isLoading = false;
 
       if (loggedIn) {
         this.loginSuccess = true; // Mostrar mensaje de éxito
@@ -50,7 +49,12 @@ export class LoginPage {
         this.loginSuccess = false; 
         console.log('Credenciales inválidas');
       }
-    }, 2000); 
+    } catch (error) {
+      console.error('Error during login:', error);
+      this.isLoading = false;
+      this.loginError = true;
+      this.loginSuccess = false;
+    }
   }
 
   navigateToRegister() {

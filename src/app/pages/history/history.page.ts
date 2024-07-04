@@ -10,16 +10,25 @@ import { Router } from '@angular/router';
 export class HistoryPage implements OnInit {
   historyTimestamps: any[] = [];
   userName: string = '';
+  userId: number = 0;
 
   constructor(private router: Router, private historyService: RegisterHistoryService) {}
 
   ngOnInit() {
     this.userName = localStorage.getItem('user') || 'user';
-    this.historyTimestamps = this.historyService.getHistory();
+    this.userId = parseInt(localStorage.getItem('userId') || '0', 10);
+    this.loadHistory();
+  }
+
+  async loadHistory() {
+    try {
+      this.historyTimestamps = await this.historyService.getHistory(this.userId);
+    } catch (error) {
+      console.error('Error al obtener el historial:', error);
+    }
   }
 
   logOut() {
-    localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 }

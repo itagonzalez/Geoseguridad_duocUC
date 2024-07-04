@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DbsqlService } from 'src/app/services/database/dbsql.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,8 @@ export class RegisterPage {
 
   constructor(
     private navCtrl: NavController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dbService: DbsqlService
   ) {
     this.formRegister = this.formBuilder.group({
       user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(8), Validators.pattern('^[a-zA-Z0-9]*$')]],
@@ -27,31 +29,34 @@ export class RegisterPage {
     });
   }
 
-  register() {
+  async register() {
     if (this.formRegister.valid) {
       const user = this.formRegister.get('user')?.value;
       const password = this.formRegister.get('password')?.value;
       const email = this.formRegister.get('email')?.value;
+      const address = this.formRegister.get('address')?.value;
+      const name = this.formRegister.get('name')?.value;
+      const lastName = this.formRegister.get('lastName')?.value;
+      const companyName = this.formRegister.get('companyName')?.value;
+      const dateBirth = this.formRegister.get('dateBirth')?.value;
 
-      // Guardar todos los datos del formulario en localStorage
-      localStorage.setItem('user', user);
-      localStorage.setItem('password', password);
-      localStorage.setItem('email', email);
+      // Crear un objeto usuario con los datos del formulario
+      const userData = { user, password, email, address, name, lastName, companyName, dateBirth };
 
-      // Guardar los demás campos en localStorage
-      localStorage.setItem('address', this.formRegister.get('address')?.value);
-      localStorage.setItem('name', this.formRegister.get('name')?.value);
-      localStorage.setItem('lastName', this.formRegister.get('lastName')?.value);
-      localStorage.setItem('companyName', this.formRegister.get('companyName')?.value);
-      localStorage.setItem('dateBirth', this.formRegister.get('dateBirth')?.value);
+      try {
+        // Guardar los datos del usuario en la base de datos
+        await this.dbService.addUser(userData);
 
-      // Indicar que el registro fue exitoso
-      this.success = true;
+        // Indicar que el registro fue exitoso
+        this.success = true;
 
-      // Redirigir al login después de un breve tiempo (simulado)
-      setTimeout(() => {
-        this.navCtrl.navigateBack(['/login']);
-      }, 2000); // Redirige después de 2 segundos (2000 ms)
+        // Redirigir al login después de un breve tiempo (simulado)
+        setTimeout(() => {
+          this.navCtrl.navigateBack(['/login']);
+        }, 2000); // Redirige después de 2 segundos (2000 ms)
+      } catch (error) {
+        console.log('Error al registrar el usuario:', error);
+      }
     } else {
       console.log('Formulario de registro inválido');
     }
