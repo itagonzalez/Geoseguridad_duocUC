@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'attendance',
     loadChildren: () => import('./pages/attendance/attendance.module').then(m => m.AttendancePageModule),
-    canActivate: [AuthGuard] //Uso de guard
+    canActivate: [AuthGuard] 
   },
   {
     path: 'profile',
