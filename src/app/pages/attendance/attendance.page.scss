@@ -1,20 +1,7 @@
-ion-header {
-  background-color: #ff5733;
-}
-
 ion-title {
   font-weight: bold;
   text-align: center;
   color: #ffffff;
-}
-
-ion-content {
-  --background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
 }
 
 .timer-wrapper {
@@ -35,7 +22,7 @@ ion-content {
 }
 
 .user-greeting {
-  font-size: 2em; /* Incrementar tamaño del saludo */
+  font-size: 2em; 
   font-weight: bold;
   color: #ffffff;
 }
@@ -45,13 +32,13 @@ ion-content {
 }
 
 .current-date {
-  font-size: 1.5em; /* Incrementar tamaño de la fecha */
+  font-size: 1.5em; 
   color: #ffffff;
   text-align: center;
 }
 
 .timer {
-  font-size: 5em; /* Aumentar tamaño del cronómetro */
+  font-size: 5em; 
   font-weight: bold;
   color: #ffffff;
   margin: 20px 0;
@@ -82,22 +69,11 @@ ion-button {
   font-size: 1.5em; /* Incrementar tamaño del mensaje */
 }
 
-ion-footer {
-  ion-toolbar {
-    --background: #ff5733;
-  }
+.mainattendance {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
-ion-tab-bar {
-  background-color: #ff5733;
-  color: #fff;
-
-  ion-tab-button {
-    --color-selected: #ffffff;
-    --color: #ffffff;
-
-    ion-icon, ion-label {
-      color: #ffffff;
-    }
-  }
-}

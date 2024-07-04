@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+    
   },
   {
     path: 'login',
@@ -17,16 +18,20 @@ const routes: Routes = [
   },
   {
     path: 'attendance',
-    loadChildren: () => import('./pages/attendance/attendance.module').then(m => m.AttendancePageModule)
+    loadChildren: () => import('./pages/attendance/attendance.module').then(m => m.AttendancePageModule),
+    canActivate: [AuthGuard] 
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'history',
-    loadChildren: () => import('./pages/history/history.module').then(m => m.HistoryModule)
+    loadChildren: () => import('./pages/history/history.module').then(m => m.HistoryModule),
+    canActivate: [AuthGuard] 
   }
+  
 ];
 
 @NgModule({
