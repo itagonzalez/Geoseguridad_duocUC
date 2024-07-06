@@ -4,6 +4,10 @@ ion-title {
   color: #ffffff;
 }
 
+ion-card {
+ background-color: #273746;
+}
+
 .timer-wrapper {
   background-color: #000000; 
   padding: 20px;
@@ -32,16 +36,18 @@ ion-title {
 }
 
 .current-date {
-  font-size: 1.5em; 
+  font-size: 2em; 
   color: #ffffff;
   text-align: center;
+  background-color: #273746;
+
 }
 
 .timer {
-  font-size: 5em; 
+  font-size: 3em; 
   font-weight: bold;
   color: #ffffff;
-  margin: 20px 0;
+  margin: 30px 0;
 }
 
 .actions {
@@ -55,6 +61,7 @@ ion-title {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  background-color: #273746;
 }
 
 ion-button {
@@ -66,14 +73,42 @@ ion-button {
   color: green;
   text-align: center;
   margin-top: 16px;
-  font-size: 1.5em; /* Incrementar tamaño del mensaje */
+  font-size: 2.0em; 
 }
 
-.mainattendance {
+.mainAttendance {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 100%;
+  
 }
 
+ion-header {
+  --background: #273746; 
+}
+
+ion-toolbar {
+  --background: #273746; 
+}
+
+ion-title {
+  --color: #ffffff; 
+}
+
+h3 {
+  color: #ffffff;
+}
+
+ion-tab-bar {
+  --background: #273746;
+}
+
+ion-tab-button {
+  --color-selected: #ffffff;
+}
+
+ion-tab-button ion-icon, ion-tab-button ion-label {
+  color: #ffffff;
+}
