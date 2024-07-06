@@ -1,9 +1,11 @@
-<ion-header [translucent]="true" style="background-color: #ff5733; text-align: center;">
-  <ion-toolbar>
-    <ion-title style="font-weight: bold; text-align: center;">GEOSEGURIDAD</ion-title>
+<ion-header>
+  <ion-toolbar style="background-color: #273746;">
+    <ion-title style="font-weight: bold; text-align: center; color: #ffffff;">
+      GEOSEGURIDAD
+    </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="enableEdit()" *ngIf="!editMode">Editar</ion-button>
-      <ion-button (click)="saveChanges()" *ngIf="editMode">Guardar Cambios</ion-button>
+      <ion-button (click)="enableEdit()" *ngIf="!editMode" class="edit-button">Editar</ion-button>
+      <ion-button (click)="saveChanges()" *ngIf="editMode" class="save-button">Guardar Cambios</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -57,7 +59,7 @@
             <ion-input [(ngModel)]="user.dateBirth" name="dateBirth" type="date" required></ion-input>
           </ion-item>
 
-          <ion-button type="submit" expand="block">Guardar Cambios</ion-button>
+          <ion-button type="submit" expand="block" class="save-button">Guardar Cambios</ion-button>
         </form>
       </div>
 
@@ -107,9 +109,9 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar style="background-color: #ff5733;">
+  <ion-toolbar style="background-color: #273746;">
     <ion-tabs>
-      <ion-tab-bar slot="bottom" style="background-color: #ff5733;">
+      <ion-tab-bar slot="bottom" style="background-color: #273746;">
         <ion-tab-button tab="attendance" [routerLink]="['/attendance']">
           <ion-icon name="alarm-outline"></ion-icon>
           <ion-label>Asistencia</ion-label>

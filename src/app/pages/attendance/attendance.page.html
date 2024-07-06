@@ -1,6 +1,8 @@
-<ion-header style="background-color: #ff5733" [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title style="font-weight: bold; text-align: center;">GEOSEGURIDAD</ion-title>
+    <ion-title>
+      GEOSEGURIDAD
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,9 +10,9 @@
   <ion-card-content class="ion-padding" fullscreen>
     <div class="timer-wrapper">
       <div class="timer-container">
-        <h3>Hola, {{ userName }}</h3>
+        <h3 class="user-greeting">Hola, {{ userName }}</h3>
         <ion-card>
-          <p>{{ currentDate | date:'medium' }}</p>
+          <p class="current-date">{{ currentDate | date:'medium' }}</p>
         </ion-card>
         <div class="timer">
           <h1>{{ hours | number:'2.0-0' }}:{{ minutes | number:'2.0-0' }}:{{ sec | number:'2.0-0' }}</h1>
@@ -24,7 +26,7 @@
           </div>
         </ion-card-content>
       </ion-card>
-      <p *ngIf="message" style="color: green; text-align: center; margin-top: 16px;">
+      <p *ngIf="message" class="message">
         {{ message }}
       </p>
     </div>
@@ -32,9 +34,9 @@
 </main>
 
 <ion-footer>
-  <ion-toolbar style="background-color: #ff5733;">
+  <ion-toolbar style="background-color: #273746;">
     <ion-tabs>
-      <ion-tab-bar slot="bottom" style="background-color: #ff5733;">
+      <ion-tab-bar slot="bottom" style="background-color: #273746;">
         <ion-tab-button tab="attendance" [routerLink]="['/attendance']">
           <ion-icon name="alarm-outline"></ion-icon>
           <ion-label>Asistencia</ion-label>

@@ -30,6 +30,31 @@ th {
 
 h2 {
   text-align: center;
-  color: #ff5733;
+  color: #000000;
   margin-top: 20px;
+  font-size: 2em;
+}
+
+ion-header {
+  --background: #273746;
+}
+
+ion-toolbar {
+  --background: #273746;
+}
+
+ion-title {
+  --color: #ffffff;
+}
+
+ion-tab-bar {
+  --background: #273746;
+}
+
+ion-tab-button {
+  --color-selected: #ffffff;
+}
+
+ion-tab-button ion-icon, ion-tab-button ion-label {
+  color: #ffffff;
 }
