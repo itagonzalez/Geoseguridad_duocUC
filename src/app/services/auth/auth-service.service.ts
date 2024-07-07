@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:3000'; // Reemplaza con la URL de tu API
+  private apiUrl = 'http://localhost:3000'; 
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,8 @@ export class AuthService {
     try {
       const response = await this.http.post<any>(`${this.apiUrl}/auth/login`, { user, password }).toPromise();
       if (response && response.success) {
-        localStorage.setItem('token', response.token); // Almacena el token JWT
+        localStorage.setItem('token', response.token); // Guarda el token en el almacenamiento local
+        localStorage.setItem('user', user); // Guarda el nombre de usuario en el almacenamiento local
         return true;
       } else {
         return false;
@@ -34,5 +35,9 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token'); // Verifica si el usuario está autenticado
+  }
+
+  getUser(): string | null {
+    return localStorage.getItem('user'); // Recupera el nombre de usuario
   }
 }

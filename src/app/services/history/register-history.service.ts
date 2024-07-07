@@ -25,7 +25,7 @@ export class RegisterHistoryService {
     };
 
     try {
-      await this.dbService.addTimestamp(timestamp).toPromise();
+      await this.dbService.addTimestamp(userId, timestamp).toPromise();
     } catch (error) {
       console.error('Error al guardar el timestamp en la base de datos:', error);
       throw error;
@@ -34,12 +34,16 @@ export class RegisterHistoryService {
 
   async getHistory(userId: number): Promise<Timestamp[]> {
     try {
-      return await this.dbService.getTimestamps(userId).toPromise();
+      const history: Timestamp[] = await this.dbService.getTimestamps(userId).toPromise();
+      return history.map((timestamp: any) => ({
+        ...timestamp,
+        date: new Date(timestamp.checkIn || timestamp.checkOut || timestamp.date),
+        checkIn: timestamp.checkIn ? new Date(timestamp.checkIn) : null,
+        checkOut: timestamp.checkOut ? new Date(timestamp.checkOut) : null
+      }));
     } catch (error) {
       console.error('Error al obtener el historial desde la base de datos:', error);
       throw error;
     }
   }
 }
-
-

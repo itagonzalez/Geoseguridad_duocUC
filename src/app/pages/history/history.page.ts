@@ -23,6 +23,7 @@ export class HistoryPage implements OnInit {
   async loadHistory() {
     try {
       this.historyTimestamps = await this.historyService.getHistory(this.userId);
+      this.historyTimestamps.sort((a, b) => b.date - a.date); // Ordenar por fecha descendente
     } catch (error) {
       console.error('Error al obtener el historial:', error);
     }

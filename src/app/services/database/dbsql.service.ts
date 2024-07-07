@@ -25,12 +25,11 @@ export class DbsqlService {
     return this.http.put(`${this.apiUrl}/users/${userData.id}`, userData);
   }
 
-  // Nuevos métodos para timestamps
-  addTimestamp(timestampData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/timestamps`, timestampData);
+  addTimestamp(userId: number, timestampData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/timestamps/user/${userId}`, timestampData);
   }
 
   getTimestamps(userId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/timestamps?userId=${userId}`);
+    return this.http.get(`${this.apiUrl}/timestamps/user/${userId}`);
   }
 }
