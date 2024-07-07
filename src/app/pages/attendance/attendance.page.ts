@@ -21,7 +21,6 @@ export class AttendancePage implements OnInit {
 
   ngOnInit() {
     this.userName = localStorage.getItem('user') || 'user';
-    // Aquí podrías obtener el userId desde el localStorage o alguna otra fuente
     this.userId = parseInt(localStorage.getItem('userId') || '0', 10);
   }
 
@@ -60,8 +59,10 @@ export class AttendancePage implements OnInit {
     const checkOut = new Date();
     try {
       await this.historyService.addTimestamps(this.userId, null, checkOut);
-      clearInterval(this.timer);
-      this.timer = null;
+      if (this.timer) {
+        clearInterval(this.timer); // Asegúrate de limpiar el temporizador aquí si existe
+        this.timer = null;
+      }
       this.message = 'Salida registrada';
       setTimeout(() => (this.message = ''), 3000);
     } catch (error) {
@@ -71,7 +72,11 @@ export class AttendancePage implements OnInit {
     }
   }
 
-  logOut() {    
+  logOut() {
+    if (this.timer) {
+      clearInterval(this.timer); // Asegúrate de limpiar el temporizador al salir
+      this.timer = null;
+    }
     this.router.navigate(['/login']);
   }
 }

@@ -1,24 +1,26 @@
+// auth.service.ts
+
 import { Injectable } from '@angular/core';
-import { DbsqlService } from '../database/dbsql.service';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private dbService: DbsqlService) { }
+  private apiUrl = 'http://localhost:3000'; // Reemplaza con la URL de tu API
+
+  constructor(private http: HttpClient) { }
 
   async login(user: string, password: string): Promise<boolean> {
     try {
-      // Obtener el usuario desde la base de datos
-      const userData = await this.dbService.getUser(user);
-
-      // Verificar las credenciales
-      if (userData && userData.password === password) {
-        localStorage.setItem('user', userData.user);
-        return true; 
+      const response = await this.http.post<any>(`${this.apiUrl}/auth/login`, { user, password }).toPromise();
+      if (response && response.success) {
+        localStorage.setItem('token', response.token); // Almacena el token JWT
+        return true;
       } else {
-        return false; 
+        return false;
       }
     } catch (error) {
       console.error('Error en login:', error);
@@ -26,7 +28,11 @@ export class AuthService {
     }
   }
 
+  logout() {
+    localStorage.removeItem('token');
+  }
+
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('user'); // Verifica si el usuario está autenticado
+    return !!localStorage.getItem('token'); // Verifica si el usuario está autenticado
   }
 }

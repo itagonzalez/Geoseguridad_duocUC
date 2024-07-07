@@ -29,7 +29,7 @@ export class RegisterPage {
     });
   }
 
-  async register() {
+  register() {
     if (this.formRegister.valid) {
       const user = this.formRegister.get('user')?.value;
       const password = this.formRegister.get('password')?.value;
@@ -43,20 +43,22 @@ export class RegisterPage {
       // Crear un objeto usuario con los datos del formulario
       const userData = { user, password, email, address, name, lastName, companyName, dateBirth };
 
-      try {
-        // Guardar los datos del usuario en la base de datos
-        await this.dbService.addUser(userData);
+      this.dbService.addUser(userData).subscribe(
+        (response) => {
+          console.log('Usuario registrado:', response);
 
-        // Indicar que el registro fue exitoso
-        this.success = true;
+          // Indicar que el registro fue exitoso
+          this.success = true;
 
-        // Redirigir al login después de un breve tiempo (simulado)
-        setTimeout(() => {
-          this.navCtrl.navigateBack(['/login']);
-        }, 2000); // Redirige después de 2 segundos (2000 ms)
-      } catch (error) {
-        console.log('Error al registrar el usuario:', error);
-      }
+          // Redirigir al login después de un breve tiempo
+          setTimeout(() => {
+            this.navCtrl.navigateBack(['/login']);
+          }, 2000); // Redirige después de 2 segundos (2000 ms)
+        },
+        (error) => {
+          console.log('Error al registrar el usuario:', error);
+        }
+      );
     } else {
       console.log('Formulario de registro inválido');
     }

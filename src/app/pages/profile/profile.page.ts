@@ -17,14 +17,17 @@ export class ProfilePage implements OnInit {
     this.loadUserData();
   }
 
-  async loadUserData() {
+  loadUserData() {
     const username = localStorage.getItem('user');
     if (username) {
-      try {
-        this.user = await this.dbsqlService.getUser(username);
-      } catch (error) {
-        console.error('Error loading user data:', error);
-      }
+      this.dbsqlService.getUser(username).subscribe(
+        (data) => {
+          this.user = data;
+        },
+        (error) => {
+          console.error('Error loading user data:', error);
+        }
+      );
     }
   }
 
@@ -32,17 +35,20 @@ export class ProfilePage implements OnInit {
     this.editMode = true;
   }
 
-  async saveChanges() {
-    try {
-      await this.dbsqlService.updateUser(this.user);
-      this.editMode = false;
-      console.log('Cambios guardados correctamente.');
-    } catch (error) {
-      console.error('Error saving user data:', error);
-    }
+  saveChanges() {
+    this.dbsqlService.updateUser(this.user).subscribe(
+      (response) => {
+        this.editMode = false;
+        console.log('Cambios guardados correctamente.');
+      },
+      (error) => {
+        console.error('Error saving user data:', error);
+      }
+    );
   }
 
   logOut() {
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 }
