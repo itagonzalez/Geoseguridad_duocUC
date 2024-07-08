@@ -11,7 +11,8 @@
     <div class="timer-wrapper">
       <div class="timer-container">
         <h3 class="user-greeting">Hola, {{ userName }}</h3>
-        <ion-card>
+        <!-- Muestra la fecha y hora actual -->
+        <ion-card class="date-card">
           <p class="current-date">{{ currentDate | date:'medium' }}</p>
         </ion-card>
         <div class="timer">
@@ -34,9 +35,9 @@
 </main>
 
 <ion-footer>
-  <ion-toolbar style="background-color: #273746;">
+  <ion-toolbar>
     <ion-tabs>
-      <ion-tab-bar slot="bottom" style="background-color: #273746;">
+      <ion-tab-bar slot="bottom">
         <ion-tab-button tab="attendance" [routerLink]="['/attendance']">
           <ion-icon name="alarm-outline"></ion-icon>
           <ion-label>Asistencia</ion-label>

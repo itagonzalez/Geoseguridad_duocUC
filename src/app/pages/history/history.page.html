@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar style="background-color: #273746;">
-    <ion-title style="font-weight: bold; text-align: center; color: #ffffff;">
+  <ion-toolbar>
+    <ion-title>
       GEOSEGURIDAD
     </ion-title>
   </ion-toolbar>
@@ -19,11 +19,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let timestamps of historyTimestamps">
-            <td>{{ timestamps.date | date:'shortDate' }}</td>
-            <td>{{ timestamps.checkIn | date:'shortTime' }}</td>
-            <td>{{ timestamps.checkOut | date:'shortTime' }}</td>
-          </tr>
+          <ng-container *ngFor="let timestamp of historyTimestamps">
+            <tr>
+              <td>{{ timestamp.date | date:'shortDate' }}</td>
+              <td>{{ timestamp.checkIn | date:'shortTime' }}</td>
+              <td>{{ timestamp.checkOut | date:'shortTime' }}</td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>
@@ -31,9 +33,9 @@
 </main>
 
 <ion-footer>
-  <ion-toolbar style="background-color: #273746;">
+  <ion-toolbar>
     <ion-tabs>
-      <ion-tab-bar slot="bottom" style="background-color: #273746;">
+      <ion-tab-bar slot="bottom">
         <ion-tab-button tab="attendance" [routerLink]="['/attendance']">
           <ion-icon name="alarm-outline"></ion-icon>
           <ion-label>Asistencia</ion-label>

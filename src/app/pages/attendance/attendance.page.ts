@@ -1,6 +1,10 @@
+// attendance.page.ts
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterHistoryService } from '../../services/history/register-history.service';
+import { AuthService } from 'src/app/services/auth/auth-service.service';
+import { TimerService } from 'src/app/services/timer/timer.service'; 
 
 @Component({
   selector: 'app-attendance',
@@ -9,7 +13,7 @@ import { RegisterHistoryService } from '../../services/history/register-history.
 })
 export class AttendancePage implements OnInit {
   userName: string = '';
-  userId: number = 0; 
+  userId: number = 0;
   currentDate: Date = new Date();
   message: string = '';
   hours: number = 0;
@@ -17,32 +21,24 @@ export class AttendancePage implements OnInit {
   sec: number = 0;
   timer: any;
 
-  constructor(private router: Router, private historyService: RegisterHistoryService) {}
+  constructor(
+    private router: Router,
+    private historyService: RegisterHistoryService,
+    private authService: AuthService,
+    public timerService: TimerService 
+  ) {}
 
   ngOnInit() {
-    this.userName = localStorage.getItem('user') || 'user';
-    // Aquí podrías obtener el userId desde el localStorage o alguna otra fuente
+    this.loadUserData();
+  }
+
+  loadUserData() {
+    this.userName = this.authService.getUser() || 'user';
     this.userId = parseInt(localStorage.getItem('userId') || '0', 10);
   }
 
-  startTimer() {
-    this.timer = setInterval(() => {
-      this.sec++;
-      if (this.sec === 60) {
-        this.sec = 0;
-        this.minutes++;
-      }
-      if (this.minutes === 60) {
-        this.minutes = 0;
-        this.hours++;
-      }
-    }, 1000);
-  }
-
   async checkIn() {
-    if (!this.timer) {
-      this.startTimer();
-    }
+    this.timerService.startTimer(); // Iniciar el temporizador al marcar entrada
 
     const checkIn = new Date();
     try {
@@ -60,8 +56,7 @@ export class AttendancePage implements OnInit {
     const checkOut = new Date();
     try {
       await this.historyService.addTimestamps(this.userId, null, checkOut);
-      clearInterval(this.timer);
-      this.timer = null;
+      this.timerService.stopTimer(); // Detener el temporizador al marcar salida
       this.message = 'Salida registrada';
       setTimeout(() => (this.message = ''), 3000);
     } catch (error) {
@@ -71,7 +66,9 @@ export class AttendancePage implements OnInit {
     }
   }
 
-  logOut() {    
+  logOut() {
+    this.timerService.stopTimer(); // Detener el temporizador al salir
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 }

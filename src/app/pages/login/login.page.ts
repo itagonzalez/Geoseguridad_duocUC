@@ -13,7 +13,7 @@ export class LoginPage {
   formLogin: FormGroup;
   loginError: boolean = false;
   loginSuccess: boolean = false; 
-  isLoading: boolean = false; 
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +32,7 @@ export class LoginPage {
     const user = this.formLogin.get('user')?.value;
     const password = this.formLogin.get('password')?.value;
 
-    this.isLoading = true; 
+    this.isLoading = true;
 
     try {
       const loggedIn = await this.authService.login(user, password);
@@ -40,24 +40,24 @@ export class LoginPage {
       this.isLoading = false;
 
       if (loggedIn) {
-        this.loginSuccess = true; // Mostrar mensaje de éxito
+        this.loginSuccess = true; // Se actualiza loginSuccess en caso de éxito
         setTimeout(() => {
           this.navCtrl.navigateForward('/attendance');
-        }, 1000); 
+        }, 1000);
       } else {
-        this.loginError = true; 
-        this.loginSuccess = false; 
+        this.loginError = true;
+        this.loginSuccess = false; // Asegúrate de manejar loginSuccess adecuadamente aquí también
         console.log('Credenciales inválidas');
       }
     } catch (error) {
       console.error('Error during login:', error);
       this.isLoading = false;
       this.loginError = true;
-      this.loginSuccess = false;
+      this.loginSuccess = false; // También asegúrate de manejar loginSuccess en caso de error
     }
   }
 
   navigateToRegister() {
-    this.navCtrl.navigateForward('/register'); 
+    this.navCtrl.navigateForward('/register');
   }
 }

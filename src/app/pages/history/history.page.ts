@@ -23,10 +23,22 @@ export class HistoryPage implements OnInit {
   async loadHistory() {
     try {
       this.historyTimestamps = await this.historyService.getHistory(this.userId);
+      this.historyTimestamps.sort((a, b) => {
+        // Ordenar primero por fecha (descendente)
+        if (b.date > a.date) return 1;
+        if (b.date < a.date) return -1;
+  
+        // Si las fechas son iguales, ordenar por hora (descendente)
+        if (b.checkIn > a.checkIn) return 1;
+        if (b.checkIn < a.checkIn) return -1;
+  
+        return 0;
+      });
     } catch (error) {
       console.error('Error al obtener el historial:', error);
     }
   }
+  
 
   logOut() {
     this.router.navigate(['/login']);
