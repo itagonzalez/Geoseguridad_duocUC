@@ -23,6 +23,7 @@ export class ProfilePage implements OnInit {
       this.dbsqlService.getUser(username).subscribe(
         (data) => {
           this.user = data;
+          console.log('Datos del usuario cargados:', this.user); // Verifica los datos en la consola
         },
         (error) => {
           console.error('Error loading user data:', error);
@@ -30,6 +31,7 @@ export class ProfilePage implements OnInit {
       );
     }
   }
+  
 
   enableEdit() {
     this.editMode = true;

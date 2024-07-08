@@ -18,7 +18,7 @@ export class DbsqlService {
   }
 
   getUser(username: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/users/${username}`);
+    return this.http.get(`${this.apiUrl}/users/user/${username}`);
   }
 
   updateUser(userData: any): Observable<any> {

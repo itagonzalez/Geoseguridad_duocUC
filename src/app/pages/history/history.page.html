@@ -19,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let timestamp of historyTimestamps.reverse()">
+          <ng-container *ngFor="let timestamp of historyTimestamps">
             <tr>
               <td>{{ timestamp.date | date:'shortDate' }}</td>
               <td>{{ timestamp.checkIn | date:'shortTime' }}</td>

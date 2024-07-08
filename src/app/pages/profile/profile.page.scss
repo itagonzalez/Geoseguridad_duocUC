@@ -1,39 +1,41 @@
 /* Estilos del header y el toolbar */
 ion-header {
-  --background: #273746; 
+  --background: #273746; /* Fondo del header */
 }
 
 ion-toolbar {
-  --background: #273746; 
+  --background: #273746; /* Fondo del toolbar */
 }
 
 ion-title {
-  --color: #ffffff; 
+  --color: #ffffff; /* Color del título */
 }
 
 .edit-button, .save-button {
-  --background: #ffffff; 
-  --color: #273746; 
+  --background: #ffffff; /* Fondo de botones */
+  --color: #273746; /* Color de texto de botones */
   font-weight: bold;
   padding: 5px 15px;
-  border-radius: 5px; 
-  border: 2px solid #273746; 
+  border-radius: 5px;
+  border: 2px solid #273746;
 }
 
 .edit-button:hover, .save-button:hover {
-  --background: #273746; 
-  --color: #ffffff; 
+  --background: #273746; /* Fondo de botones en hover */
+  --color: #ffffff; /* Color de texto de botones en hover */
 }
 
 /* Estilos del contenido principal */
 ion-content {
-  --background: #f4f4f4; 
+  --background: #1f2833; /* Fondo del contenido */
+  color: #ffffff; /* Color del texto principal */
   padding: 16px;
 }
 
 /* Estilos del card y los ítems */
 ion-card {
-  background-color: #ffffff;
+  background-color: #273746; /* Fondo del card */
+  color: #ffffff; /* Color del texto en el card */
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
@@ -56,21 +58,21 @@ ion-label {
 }
 
 ion-input[readonly] {
-  --color: #666666;
+  --color: #cccccc; /* Color de texto readonly */
 }
 
 ion-tabs {
-  --color: #ffffff;
+  --color: #ffffff; /* Color de texto de las tabs */
 }
 
 ion-tab-bar {
-  --background: #273746;
+  --background: #273746; /* Fondo de la tab bar */
 }
 
 ion-tab-button {
-  --color-selected: #ffffff;
+  --color-selected: #ffffff; /* Color de texto seleccionado */
 }
 
 ion-tab-button ion-icon, ion-tab-button ion-label {
-  color: #ffffff;
+  color: #ffffff; /* Color de íconos y texto de las tabs */
 }

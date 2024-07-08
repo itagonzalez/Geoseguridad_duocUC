@@ -35,6 +35,8 @@ export class RegisterHistoryService {
   async getHistory(userId: number): Promise<Timestamp[]> {
     try {
       const history: Timestamp[] = await this.dbService.getTimestamps(userId).toPromise();
+      // Ordenar por fecha descendente
+      history.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       return history.map((timestamp: any) => ({
         ...timestamp,
         date: new Date(timestamp.checkIn || timestamp.checkOut || timestamp.date),
@@ -46,4 +48,5 @@ export class RegisterHistoryService {
       throw error;
     }
   }
+  
 }
