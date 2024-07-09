@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DbsqlService } from '../database/dbsql.service';
 
-interface Timestamp {
+export interface Timestamp {
   id?: number;
   userId: number;
   date: Date;
