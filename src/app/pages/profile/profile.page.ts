@@ -18,9 +18,9 @@ export class ProfilePage implements OnInit {
   }
 
   loadUserData() {
-    const username = localStorage.getItem('user');
-    if (username) {
-      this.dbsqlService.getUser(username).subscribe(
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.dbsqlService.getUser(user).subscribe(
         (data) => {
           this.user = data;
           console.log('Datos del usuario cargados:', this.user); // Verifica los datos en la consola
